@@ -368,9 +368,17 @@ header {
     margin-top: 0; }
 
 div.sidebar {
-  background-color: #9c62da;
-  height: 500px;
-  border-radius: 5px; }
+  background-color: #b68be4;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 15px; }
+  div.sidebar p {
+    margin-bottom: 0.25em; }
+  div.sidebar button {
+    margin-top: 1em; }
+  div.sidebar select {
+    width: 75%; }
   @media screen and (min-width: 45.375em) {
     div.sidebar {
       margin-left: 0%;
@@ -391,8 +399,6 @@ div.sidebar {
         margin-right: 0; } }
   @media screen and (max-width: 25em) {
     div.sidebar {
-      height: 0px;
-      display: none;
       margin-left: 0%;
       display: block;
       float: left;

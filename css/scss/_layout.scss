@@ -36,9 +36,23 @@ header {
 }
 
 div.sidebar {
-	background-color: lighten($purple, 30%);
-	height: 500px;
+	background-color: lighten($purple, 40%);
+	padding: 5px;
 	border-radius: 5px;
+	text-align: center;
+	margin-bottom: 15px;
+
+	p {
+		margin-bottom: 0.25em;
+	}
+
+	button {
+		margin-top: 1em;
+	}
+
+	select {
+		width: 75%;
+	}
 
 	@include media($large) {
 		@include shift(0);
@@ -51,8 +65,6 @@ div.sidebar {
 	}
 
 	@include media($small) {
-		height: 0px;
-		display: none;
 		@include shift(0);
 		@include span-columns(8);
 	}
