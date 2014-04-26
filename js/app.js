@@ -10,29 +10,29 @@ $(document).ready(function(){
 	});
 
 	data = [
-		// {	school: "Medill",
-		// 	val: "JOUR",
-		// 	distros: [
-		// 	{	val: "AR",
-		// 		name: "Art/Art History" },
-		// 	{	val: "EC",
-		// 		name: "Economics" },
-		// 	{	val: "HS",
-		// 		name: "History" },
-		// 	{	val: "LT",
-		// 		name: "Literature" },
-		// 	{	val: "MS",
-		// 		name: "Math/Science (non statistical)" },
-		// 	{	val: "MS*",
-		// 		name: "Math/Science (statistical)" },
-		// 	{	val: "PSA",
-		// 		name: "American Political Science" },			
-		// 	{	val: "PSI",
-		// 		name: "International Political Science" },
-		// 	{	val: "RP",
-		// 		name: "Religion/Philosophy" }
-		// 	]
-		// },
+		{	school: "Medill",
+			val: "JOUR",
+			distros: [
+			{	val: "AR",
+				name: "Art/Art History" },
+			{	val: "EC",
+				name: "Economics" },
+			{	val: "HS",
+				name: "History" },
+			{	val: "LT",
+				name: "Literature" },
+			{	val: "MS",
+				name: "Math/Science (non statistical)" },
+			{	val: "MS*",
+				name: "Math/Science (statistical)" },
+			{	val: "PSA",
+				name: "American Political Science" },			
+			{	val: "PSI",
+				name: "International Political Science" },
+			{	val: "RP",
+				name: "Religion/Philosophy" }
+			]
+		},
 		{	school: "McCormick",
 			val: "MEAS",
 			distros: [
@@ -917,11 +917,12 @@ $(document).ready(function(){
 	};	
 
 	subj = $("select#subject");
+	var subjectOptions = "";
+	subjectOptions += "<option value='NULL'>Don't filter</option>\n"; //Add null option
 	for (var i = 0; i < subjects.length; i++) {
-		subj.append(
-			"<option value='" + subjects[i].symbol + "'>" + subjects[i].name + "</option>"
-		)
-	};	
+		subjectOptions +="<option value='" + subjects[i].symbol + "'>" + subjects[i].name + "</option>\n";
+	};
+	subj.html(subjectOptions);
 
 	updateDistroSelect(data[0].distros);
 

@@ -319,6 +319,10 @@ textarea {
   /* 1 */
   vertical-align: top;
   /* 2 */ }
+  
+ div#filteroptions {
+	margin-top: 10px;
+}
 
 /* ==========================================================================
    Tables
@@ -508,4 +512,5 @@ div.class {
     background-color: #b68be4; }
 
 footer div.wrapper {
-  font-size: 0.8em; }
+  font-size: 0.8em; 
+  margin: 10px;}
