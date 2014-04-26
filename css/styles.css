@@ -506,3 +506,6 @@ div.class {
     border-bottom-left-radius: 0px; }
   div.class.active div.header:hover {
     background-color: #b68be4; }
+
+footer div.wrapper {
+  font-size: 0.8em; }
