@@ -435,13 +435,16 @@ div.sidebar {
     div.responses:last-child {
       margin-right: 0; } }
 	  
-div.responses-collapsed {
-	margin-left: 0%;
-    display: block;
-    float: center
-    margin-right: 3.57866%;
-    width: 100%;
+div.responses{
+	min-height:250px;
+	padding-bottom:150px;
 }
+
+div.responses{
+ background-image: url("http://www.northwestern.edu/univ-relations/identity-system/logos/NU_Logo_purple.jpg");
+ background-repeat: no-repeat;
+ background-position:bottom;
+ }
 
 div.class {
   margin-top: 0.4em;
@@ -519,12 +522,3 @@ footer div.wrapper {
   font-size: 0.8em; 
   margin: 10px;}
 
-
-<body>{
- background-image: url("http://www.northwestern.edu/univ-relations/identity-system/logos/NU_Logo_purple.jpg.gif");
- background-repeat: no-repeat;
- background-position: 200px 200px;
-}</body>
-=======
-  font-size: 0.8em;
-  text-align: center; }
