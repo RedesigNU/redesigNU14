@@ -8,6 +8,8 @@ function main(){
 
 
 function Theme_Search(data.school,data.distro){
+	var mccormick = $.csv.toObjects("/mccormick.csv"):
+	console.log(mccormick);
 	var theme_list = new Array();
 	var count=0;
 	if (data.distro == "FAL")
