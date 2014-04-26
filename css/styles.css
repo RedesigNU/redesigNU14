@@ -434,6 +434,14 @@ div.sidebar {
     width: 100%; }
     div.responses:last-child {
       margin-right: 0; } }
+	  
+div.responses-collapsed {
+	margin-left: 0%;
+    display: block;
+    float: center
+    margin-right: 3.57866%;
+    width: 100%;
+}
 
 div.class {
   margin-top: 0.4em;

@@ -989,7 +989,7 @@ function generateClassDisplay(class_list,school)
 		for (cls in class_list)
 		{
 			cls = class_list[cls];
-			boxcode += "<div class='class'><div class='header'> <h4>"+cls.Header+"</h4> \
+			boxcode += "<div class='class'><div class='header'> <h5>"+cls.SysId+"</h5><h4>"+cls.Name+"</h4> \
 					<ul>";
 			boxcode += "</ul></div><div style='display: none;' class='content'>";
 				for (item in cls.Sections) {
@@ -1007,6 +1007,8 @@ function generateClassDisplay(class_list,school)
 }
 
 function sendFormData() {
+	//Please wait text
+	$(".responses").html("Please wait. Our hackers are fetching your searches...");
 	var form = $("form");
 	var array = form.serializeArray();
 

@@ -55,10 +55,16 @@ function getDiscussions(inClass)
 	return returnData;
 }
 
-function getHeader(inClass)
+function getName(inClass)
 {
-	//Returns a header title for the course, e.g. "PHYSICS 135-1 General Physics"
-	return inClass.title+" " +inClass.subject + " " + inClass.catalog_num;
+	//Returns a  title for the course, e.g. "General Physics"
+	return inClass.title;
+}
+
+function getSysId(inClass)
+{
+	//Returns the class/dep id number "PHYSICS 135-1"
+	return inClass.subject + " " + inClass.catalog_num;
 }
 
 function getFlags(flag)
@@ -114,7 +120,8 @@ function getMatchingClasses(toFind,termData) //Arguments: Special array of class
 		if (continueSearch)
 		{ continue;  } //Move to next class
 		
-		var headerData = getHeader(termData[curClass]);
+		var nameData = getName(termData[curClass]);
+		var sysidData = getSysId(termData[curClass]);
 		
 		var overviewData = getOverview(termData[curClass]);
 		var flagsData = getFlags(toFind.flags[i]);
@@ -139,7 +146,7 @@ function getMatchingClasses(toFind,termData) //Arguments: Special array of class
 		}
 		
 		//Add the class description to the return data
-		returnData.push({"id": classIdData, "Header": headerData, "Time": timeData, "Instructor": instructorData, "Room": roomData, "Sections":sectionData, "Overview": overviewData, "Flags": flagsData, "Available": availabilityData, "Class_num": classNumData, "Discussions":DISdata});
+		returnData.push({"id": classIdData, "Name": nameData, "SysId":sysidData, "Time": timeData, "Instructor": instructorData, "Room": roomData, "Sections":sectionData, "Overview": overviewData, "Flags": flagsData, "Available": availabilityData, "Class_num": classNumData, "Discussions":DISdata});
 	}
 	return returnData;
 }
