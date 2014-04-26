@@ -968,7 +968,31 @@ LoadApp();
 
 function generateClassDisplay(class_list)
 {
-	
+	var r = $(".responses");
+	if (class_list.length == 0)
+	{
+		r.html("Sorry, your search returned no results. Try some other department.");
+	}
+	else
+	{
+		r.html("");
+		for (cls in class_list)
+		{
+			var boxcode = "<div class='header'> <h5>"+cls.Header+"</h5><h4>"+cls.Class_num+"</h4> \
+					<ul>";
+						
+				boxcode += "</ul> \
+				</div> \
+				<div style='display: none;' class='content'> \
+					<div class='meta'> \
+						<p class='prof'><span>Professor: </span>Lorem Ipsum</p> \
+						<p class='times'><span>Times: </span>Lorem Ipsum</p> \
+					</div> \
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, sed placeat porro est numquam aliquam perspiciatis perferendis. Eligendi, illo tenetur suscipit neque possimus perferendis deleniti beatae at laborum iste labore.</p> \
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, incidunt veniam consectetur rem dolor deserunt magnam voluptatem suscipit nam distinctio iste ab autem vero voluptatibus explicabo facere tempora totam modi!</p> \
+				</div>"
+		}
+	}
 }
 
 function sendFormData() {
@@ -1013,11 +1037,12 @@ function Theme_Search(flags, dept)
 	var flag_list = [];
 	var count=0;
 
-	for (var i=0; i<Themes.length; i++){
+	for (var i=0; i<Themes.length; i++)
+	{
 		//for flag in flags
 		if ((Themes[i].flags & (flags)) > 0 && Themes[i].DEPT == dept)
 		{
-			theme_list[count++]= Themes[i].COURSE;
+			theme_list[count]= Themes[i].COURSE;
 			flag_list[count++] = Themes[i].flags;
 		}
 	}
