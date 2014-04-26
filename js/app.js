@@ -978,18 +978,16 @@ function generateClassDisplay(class_list) {
 			var boxcode = 
 				"<div class='header'>" +
 				"<h5>" + item.subject + " " + item.catalog_num + "</h5>" +
-				"<h4>" + item.class + "</h4>"
-
-				boxcode += "</ul> \
-				</div> \
-				<div style='display: none;' class='content'> \
-					<div class='meta'> \
-						<p class='prof'><span>Professor: </span>Lorem Ipsum</p> \
-						<p class='times'><span>Times: </span>Lorem Ipsum</p> \
-					</div> \
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, sed placeat porro est numquam aliquam perspiciatis perferendis. Eligendi, illo tenetur suscipit neque possimus perferendis deleniti beatae at laborum iste labore.</p> \
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, incidunt veniam consectetur rem dolor deserunt magnam voluptatem suscipit nam distinctio iste ab autem vero voluptatibus explicabo facere tempora totam modi!</p> \
-				</div>"
+				"<h4>" + item.title + " " + item.topic + "</h4>" + 
+				"<ul>" + "</ul>"
+				+ "</div>" +
+				"<div class='content'>" + 
+				"<div class='meta'>" +
+				"<p class='prof'><span>Professor: </span>" + item.instructor.name + "</p>" +
+				"<p class='times'><span>Times: </span>" + item.Time + "</p>" +
+				"</div>" +
+				"<p>" + item.description + "</p>" +
+				"</div>"
 			};
 			r.append(boxcode);
 		}
