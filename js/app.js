@@ -1,4 +1,4 @@
-$(document).ready(function(){
+3$(document).ready(function(){
 
 LoadApp();
 
