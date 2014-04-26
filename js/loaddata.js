@@ -32,6 +32,7 @@ function LoadThemes()
 	return $.get("data/mccormick.csv", function(data) {
 		Themesstr = String(data);
 		ParseThemes(Themesstr);
+		console.log("themes");
 	})
 
 	function ParseThemes(str)

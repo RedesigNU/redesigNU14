@@ -973,7 +973,7 @@ function createBoxSlides()
 
 function getDistroString(school, flag)
 {
-}
+};
 
 function generateClassDisplay(class_list,school)
 {
@@ -1004,6 +1004,7 @@ function generateClassDisplay(class_list,school)
 		r.html(boxcode);
 		createBoxSlides();
 	}
+}
 
 function sendFormData() {
 	var form = $("form");
