@@ -438,13 +438,10 @@ div.sidebar {
 div.responses{
 	min-height:250px;
 	padding-bottom:150px;
-}
-
-div.responses{
- background-image: url("http://www.northwestern.edu/univ-relations/identity-system/logos/NU_Logo_purple.jpg");
+	 background-image: url("http://www.northwestern.edu/univ-relations/identity-system/logos/NU_Logo_purple.jpg");
  background-repeat: no-repeat;
  background-position:bottom;
- }
+}
 
 div.class {
   margin-top: 0.4em;
@@ -506,6 +503,9 @@ div.class {
     div.class div.content p {
       padding-left: 0.4em;
       padding-right: 0.4em; }
+	div.class div.content p.section {
+		background-color: #D7D2Dc;
+	}
     div.class div.content p:first-of-type {
       margin-top: 0.5em; }
     div.class div.content p:last-of-type {
