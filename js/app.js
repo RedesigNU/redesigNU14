@@ -976,6 +976,7 @@ function generateClassDisplay(class_list) {
 			item = class_list[i];
 
 			var boxcode = 
+				"<div class='class'>" +
 				"<div class='header'>" +
 				"<h5>" + item.subject + " " + item.catalog_num + "</h5>" +
 				"<h4>" + item.title + " " + item.topic + "</h4>" + 
