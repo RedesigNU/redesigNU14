@@ -1,6 +1,5 @@
 
-
-funtion Theme_Search(theme){
+function Theme_Search(theme){
 	var theme_list = new Array();
 	var count=0;
 	if (theme == "FAL")
