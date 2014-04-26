@@ -1,0 +1,82 @@
+div.wrapper {
+	@include outer-container;
+	padding-right: 1em;
+	padding-left: 1em;
+	margin: 0 auto;
+}
+
+body {
+	font-family: 'Proxima-Nova';
+}
+
+body, html {
+	margin: 0;
+	padding: 0;
+}
+
+
+header {
+	text-align: center;
+	background-color: lighten($purple, 50%);
+	width: 100%;
+	padding: 10px;
+	
+	h1 {
+		color: $purple;
+		margin-bottom: 0.2em;
+	}
+
+	p {
+		margin-top: 0;
+	}
+
+	margin-bottom: 1em;
+
+}
+
+div.class {
+	margin-top: 0.2em;
+	margin-bottom: 0.2em;
+	@include shift(3);
+	@include span-columns(10);
+
+	div.header {
+		position: relative;
+		border-top-right-radius: 5px;
+		border-top-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+		background-color: lighten($purple, 60%);
+		padding: 0.4em;
+		
+		h5 {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+		
+		h4 {
+			margin-top: 0.0em;
+			margin-bottom: 0;
+		}
+
+		&:hover {
+			cursor: pointer;
+			background-color: lighten($purple, 50%);
+		}
+
+		span {
+			background-color: white;
+			padding: 1px 5px;
+			border-radius: 2px;
+			position: absolute;
+			right: 5px;
+			top: 5px;
+		}
+
+	}
+
+	div.content {
+		display: none;
+	}	
+
+}
