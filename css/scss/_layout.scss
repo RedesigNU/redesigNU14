@@ -136,8 +136,44 @@ div.class {
 
 	}
 
+	div.meta {
+		background-color: lighten($purple, 60%);
+		width: 100%;
+		padding: -0.4em;
+		margin-top: 0px;
+
+		p {
+			margin: 0 0 0 0 !important;
+			padding-top: 0.2em !important;
+			padding-bottom: 0.2em !important;
+
+			span {
+				font-weight: bold;
+			}
+		}
+
+	}
+
 	div.content {
+		font-size: 0.95em;
 		display: none;
+		background-color: lighten($purple, 65%);
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+
+		p {
+			padding-left: 0.4em;
+			padding-right: 0.4em;
+		}
+
+		p:first-of-type {
+			margin-top: 0.5em;
+		}
+
+		p:last-of-type {
+			padding-bottom: 0.5em;
+			margin-bottom: 0.5em;
+		}
 	}
 
 	&.active {
@@ -152,45 +188,6 @@ div.class {
 			background-color: lighten($purple, 40%);
 		}
 
-		div.meta {
-			background-color: lighten($purple, 60%);
-			width: 100%;
-			padding: -0.4em;
-			margin-top: 0px;
-
-			p {
-				margin: 0 0 0 0 !important;
-				padding-top: 0.2em !important;
-				padding-bottom: 0.2em !important;
-
-				span {
-					font-weight: bold;
-				}
-			}
-
-		}
-
-		div.content {
-			font-size: 0.95em;
-			display: block;
-			background-color: lighten($purple, 65%);
-			border-bottom-right-radius: 5px;
-			border-bottom-left-radius: 5px;
-
-			p {
-				padding-left: 0.4em;
-				padding-right: 0.4em;
-			}
-
-			p:first-of-type {
-				margin-top: 0.5em;
-			}
-
-			p:last-of-type {
-				padding-bottom: 0.5em;
-				margin-bottom: 0.5em;
-			}
-		}
 	}
 
 }

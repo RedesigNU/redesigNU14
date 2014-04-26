@@ -469,36 +469,34 @@ div.class {
       background-color: white;
       padding: 1px 5px;
       border-radius: 2px; }
+  div.class div.meta {
+    background-color: #eadef7;
+    width: 100%;
+    padding: -0.4em;
+    margin-top: 0px; }
+    div.class div.meta p {
+      margin: 0 0 0 0 !important;
+      padding-top: 0.2em !important;
+      padding-bottom: 0.2em !important; }
+      div.class div.meta p span {
+        font-weight: bold; }
   div.class div.content {
-    display: none; }
+    font-size: 0.95em;
+    display: none;
+    background-color: #f7f2fc;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px; }
+    div.class div.content p {
+      padding-left: 0.4em;
+      padding-right: 0.4em; }
+    div.class div.content p:first-of-type {
+      margin-top: 0.5em; }
+    div.class div.content p:last-of-type {
+      padding-bottom: 0.5em;
+      margin-bottom: 0.5em; }
   div.class.active div.header {
     background-color: #d0b4ee;
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px; }
   div.class.active div.header:hover {
     background-color: #b68be4; }
-  div.class.active div.meta {
-    background-color: #eadef7;
-    width: 100%;
-    padding: -0.4em;
-    margin-top: 0px; }
-    div.class.active div.meta p {
-      margin: 0 0 0 0 !important;
-      padding-top: 0.2em !important;
-      padding-bottom: 0.2em !important; }
-      div.class.active div.meta p span {
-        font-weight: bold; }
-  div.class.active div.content {
-    font-size: 0.95em;
-    display: block;
-    background-color: #f7f2fc;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px; }
-    div.class.active div.content p {
-      padding-left: 0.4em;
-      padding-right: 0.4em; }
-    div.class.active div.content p:first-of-type {
-      margin-top: 0.5em; }
-    div.class.active div.content p:last-of-type {
-      padding-bottom: 0.5em;
-      margin-bottom: 0.5em; }

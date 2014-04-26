@@ -20,7 +20,7 @@ for x in terms_data:
 	terms.append(x['term_id'])
 
 
-for term in terms:
+for term in terms[0:1]:
 	fname = str(term) + "_data"
 	f = open(fname, 'w')
 	f.write("[")
@@ -28,5 +28,8 @@ for term in terms:
 		url = BASE_URL + 'courses/?term=' + str(term) + '&subject=' + subject
 		course_response = requests.get(url)
 		course_data = json.loads(course_response.content)
-		f.write(str(course_data)[1:-1])
+		course_data = course_data.encode("utf-8")
+		a = str(course_data)[1:-1]
+		print type(a)
+		f.write(a)
 	f.write("]")
