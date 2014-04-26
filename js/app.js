@@ -1,4 +1,4 @@
-3$(document).ready(function(){
+$(document).ready(function(){
 
 LoadApp();
 
@@ -972,8 +972,8 @@ function createBoxSlides()
 }
 
 function getDistroString(school, flag)
-{;
-}
+{
+};
 
 function generateClassDisplay(class_list,school)
 {

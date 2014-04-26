@@ -516,5 +516,15 @@ div.class {
     background-color: #b68be4; }
 
 footer div.wrapper {
+  font-size: 0.8em; 
+  margin: 10px;}
+
+
+<body>{
+ background-image: url("http://www.northwestern.edu/univ-relations/identity-system/logos/NU_Logo_purple.jpg.gif");
+ background-repeat: no-repeat;
+ background-position: 200px 200px;
+}</body>
+=======
   font-size: 0.8em;
   text-align: center; }
