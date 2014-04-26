@@ -352,6 +352,7 @@ body {
 
 body, html {
   margin: 0;
+  margin-bottom: 3em;
   padding: 0; }
 
 header {
@@ -366,16 +367,75 @@ header {
   header p {
     margin-top: 0; }
 
+div.sidebar {
+  background-color: #9c62da;
+  height: 500px;
+  border-radius: 5px; }
+  @media screen and (min-width: 45.375em) {
+    div.sidebar {
+      margin-left: 0%;
+      display: block;
+      float: left;
+      margin-right: 1.75788%;
+      width: 36.40133%; }
+      div.sidebar:last-child {
+        margin-right: 0; } }
+  @media screen and (min-width: 25.0625em) and (max-width: 45.3125em) {
+    div.sidebar {
+      margin-left: 0%;
+      display: block;
+      float: left;
+      margin-right: 2.35765%;
+      width: 31.76157%; }
+      div.sidebar:last-child {
+        margin-right: 0; } }
+  @media screen and (max-width: 25em) {
+    div.sidebar {
+      height: 0px;
+      display: none;
+      margin-left: 0%;
+      display: block;
+      float: left;
+      margin-right: 3.57866%;
+      width: 100%; }
+      div.sidebar:last-child {
+        margin-right: 0; } }
+
+@media screen and (min-width: 45.375em) {
+  div.responses {
+    margin-left: 0%;
+    display: block;
+    float: left;
+    margin-right: 1.75788%;
+    width: 61.8408%; }
+    div.responses:last-child {
+      margin-right: 0; } }
+@media screen and (min-width: 25.0625em) and (max-width: 45.3125em) {
+  div.responses {
+    margin-left: 0%;
+    display: block;
+    float: left;
+    margin-right: 2.35765%;
+    width: 65.88078%; }
+    div.responses:last-child {
+      margin-right: 0; } }
+@media screen and (max-width: 25em) {
+  div.responses {
+    margin-left: 0%;
+    display: block;
+    float: left;
+    margin-right: 3.57866%;
+    width: 100%; }
+    div.responses:last-child {
+      margin-right: 0; } }
+
 div.class {
   margin-top: 0.4em;
-  margin-bottom: 0.4em;
-  margin-left: 19.0796%;
-  display: block;
-  float: left;
-  margin-right: 1.75788%;
-  width: 61.8408%; }
-  div.class:last-child {
-    margin-right: 0; }
+  margin-bottom: 0.4em; }
+  div.class:first-of-type {
+    margin-top: 0; }
+  div.class:last-of-type {
+    margin-bottom: 0; }
   div.class div.header {
     user-select: none;
     -webkit-user-select: none;
@@ -396,30 +456,49 @@ div.class {
     div.class div.header:hover {
       cursor: pointer;
       background-color: #d0b4ee; }
-    div.class div.header span {
-      background-color: white;
-      padding: 1px 5px;
-      border-radius: 2px;
+    div.class div.header ul {
       position: absolute;
       right: 5px;
-      top: 5px; }
-    div.class div.header span:nth-of-type(2) {
-      right: 30px; }
+      top: 5px;
+      list-style: none;
+      -webkit-padding-start: 0px;
+      -webkit-margin-before: 0em;
+      -webkit-margin-after: 0em; }
+    div.class div.header li {
+      display: inline;
+      background-color: white;
+      padding: 1px 5px;
+      border-radius: 2px; }
   div.class div.content {
-    height: 0px;
-    overflow: hidden; }
+    display: none; }
   div.class.active div.header {
     background-color: #d0b4ee;
     border-bottom-right-radius: 0px;
     border-bottom-left-radius: 0px; }
+  div.class.active div.header:hover {
+    background-color: #b68be4; }
+  div.class.active div.meta {
+    background-color: #eadef7;
+    width: 100%;
+    padding: -0.4em;
+    margin-top: 0px; }
+    div.class.active div.meta p {
+      margin: 0 0 0 0 !important;
+      padding-top: 0.2em !important;
+      padding-bottom: 0.2em !important; }
+      div.class.active div.meta p span {
+        font-weight: bold; }
   div.class.active div.content {
-    height: 200px;
-    padding: 0.4em;
+    font-size: 0.95em;
     display: block;
     background-color: #f7f2fc;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px; }
+    div.class.active div.content p {
+      padding-left: 0.4em;
+      padding-right: 0.4em; }
     div.class.active div.content p:first-of-type {
       margin-top: 0.5em; }
     div.class.active div.content p:last-of-type {
+      padding-bottom: 0.5em;
       margin-bottom: 0.5em; }

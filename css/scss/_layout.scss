@@ -11,6 +11,7 @@ body {
 
 body, html {
 	margin: 0;
+	margin-bottom: 3em;
 	padding: 0;
 }
 
@@ -34,11 +35,59 @@ header {
 
 }
 
+div.sidebar {
+	background-color: lighten($purple, 30%);
+	height: 500px;
+	border-radius: 5px;
+
+	@include media($large) {
+		@include shift(0);
+		@include span-columns(6);
+	}
+
+	@include media($medium) {
+		@include shift(0);
+		@include span-columns(4);
+	}
+
+	@include media($small) {
+		height: 0px;
+		display: none;
+		@include shift(0);
+		@include span-columns(8);
+	}
+
+}
+
+div.responses {
+	@include media($large) {
+		@include shift(0);
+		@include span-columns(10);
+	}
+
+	@include media($medium) {
+		@include shift(0);
+		@include span-columns(8);
+	}
+
+	@include media($small) {
+		@include shift(0);
+		@include span-columns(8);
+	}
+}
+
 div.class {
+
+	&:first-of-type {
+		margin-top: 0;
+	}
+
+	&:last-of-type {
+		margin-bottom: 0;
+	}
+
 	margin-top: 0.4em;
 	margin-bottom: 0.4em;
-	@include shift(3);
-	@include span-columns(10);
 
 	div.header {
 		user-select: none;
@@ -68,24 +117,27 @@ div.class {
 			background-color: lighten($purple, 50%);
 		}
 
-		span {
-			background-color: white;
-			padding: 1px 5px;
-			border-radius: 2px;
+		ul {
 			position: absolute;
 			right: 5px;
 			top: 5px;
+			list-style: none;
+			-webkit-padding-start: 0px;
+			-webkit-margin-before: 0em;
+			-webkit-margin-after: 0em;
 		}
 
-		span:nth-of-type(2) {
-			right: 30px;
+		li {
+			display: inline;
+			background-color: white;
+			padding: 1px 5px;
+			border-radius: 2px;
 		}
 
 	}
 
 	div.content {
-		height: 0px;
-		overflow: hidden;
+		display: none;
 	}
 
 	&.active {
@@ -96,19 +148,46 @@ div.class {
 			border-bottom-left-radius: 0px;
 		}
 
+		div.header:hover {
+			background-color: lighten($purple, 40%);
+		}
+
+		div.meta {
+			background-color: lighten($purple, 60%);
+			width: 100%;
+			padding: -0.4em;
+			margin-top: 0px;
+
+			p {
+				margin: 0 0 0 0 !important;
+				padding-top: 0.2em !important;
+				padding-bottom: 0.2em !important;
+
+				span {
+					font-weight: bold;
+				}
+			}
+
+		}
+
 		div.content {
-			height: 200px;
-			padding: 0.4em;
+			font-size: 0.95em;
 			display: block;
 			background-color: lighten($purple, 65%);
 			border-bottom-right-radius: 5px;
 			border-bottom-left-radius: 5px;
+
+			p {
+				padding-left: 0.4em;
+				padding-right: 0.4em;
+			}
 
 			p:first-of-type {
 				margin-top: 0.5em;
 			}
 
 			p:last-of-type {
+				padding-bottom: 0.5em;
 				margin-bottom: 0.5em;
 			}
 		}
