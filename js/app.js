@@ -966,21 +966,20 @@ LoadApp();
 	});
 });
 
-function generateClassDisplay(class_list)
-{
+function generateClassDisplay(class_list) {
+	console.log(class_list);
 	var r = $(".responses");
-	if (class_list.length == 0)
-	{
+	if (class_list.length == 0) {
 		r.html("Sorry, your search returned no results. Try some other department.");
-	}
-	else
-	{
-		r.html("");
-		for (cls in class_list)
-		{
-			var boxcode = "<div class='header'> <h5>"+cls.Header+"</h5><h4>"+cls.Class_num+"</h4> \
-					<ul>";
-						
+	} else {
+		for (var i = class_list.length - 1; i >= 0; i--) {
+			item = class_list[i];
+
+			var boxcode = 
+				"<div class='header'>" +
+				"<h5>" + item.subject + " " + item.catalog_num + "</h5>" +
+				"<h4>" + item.class + "</h4>"
+
 				boxcode += "</ul> \
 				</div> \
 				<div style='display: none;' class='content'> \
@@ -991,9 +990,10 @@ function generateClassDisplay(class_list)
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, sed placeat porro est numquam aliquam perspiciatis perferendis. Eligendi, illo tenetur suscipit neque possimus perferendis deleniti beatae at laborum iste labore.</p> \
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, incidunt veniam consectetur rem dolor deserunt magnam voluptatem suscipit nam distinctio iste ab autem vero voluptatibus explicabo facere tempora totam modi!</p> \
 				</div>"
+			};
+			r.append(boxcode);
 		}
 	}
-}
 
 function sendFormData() {
 	var form = $("form");
@@ -1025,7 +1025,6 @@ function Search(data)
 	.then(function () {
 		var themes_matching = Theme_Search(data.flags,data.dept);
 		var final_classes = getMatchingClasses(themes_matching,Classes[data.term][data.dept]);
-		console.log(final_classes);
 		//Generate HTML here
 		generateClassDisplay(final_classes); //Generate the class display.
 	});
