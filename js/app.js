@@ -2,14 +2,7 @@ $(document).ready(function(){
 
 LoadApp();
 
-	$("div.class div.header").click(function(e) {
-		e.preventDefault();
-		var parent = $(this).parent();
-		parent.toggleClass("active");
-		var next = $(this).next();
-		next.slideToggle(400, function(){
-		});
-	});
+	createBoxSlides();
 
 	data = [
 		{	school: "McCormick",
@@ -966,7 +959,23 @@ LoadApp();
 	});
 });
 
-function generateClassDisplay(class_list)
+function createBoxSlides()
+{
+	$("div.class div.header").click(function(e) {
+		e.preventDefault();
+		var parent = $(this).parent();
+		parent.toggleClass("active");
+		var next = $(this).next();
+		next.slideToggle(400, function(){
+		});
+	});
+}
+
+function getDistroString(school, flag)
+{
+}
+
+function generateClassDisplay(class_list,school)
 {
 	var r = $(".responses");
 	if (class_list.length == 0)
@@ -976,22 +985,25 @@ function generateClassDisplay(class_list)
 	else
 	{
 		r.html("");
+		var boxcode = "";
+		console.log(class_list[0]);
 		for (cls in class_list)
 		{
-			var boxcode = "<div class='header'> <h5>"+cls.Header+"</h5><h4>"+cls.Class_num+"</h4> \
+			cls = class_list[cls];
+			boxcode += "<div class='class'><div class='header'> <h4>"+cls.Header+"</h4> \
 					<ul>";
-						
-				boxcode += "</ul> \
-				</div> \
-				<div style='display: none;' class='content'> \
-					<div class='meta'> \
-						<p class='prof'><span>Professor: </span>Lorem Ipsum</p> \
-						<p class='times'><span>Times: </span>Lorem Ipsum</p> \
-					</div> \
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, sed placeat porro est numquam aliquam perspiciatis perferendis. Eligendi, illo tenetur suscipit neque possimus perferendis deleniti beatae at laborum iste labore.</p> \
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores, incidunt veniam consectetur rem dolor deserunt magnam voluptatem suscipit nam distinctio iste ab autem vero voluptatibus explicabo facere tempora totam modi!</p> \
-				</div>"
+			boxcode += "</ul></div><div style='display: none;' class='content'>";
+				for (item in cls.Sections) {
+				  boxcode += "<div class='meta'> <p class='section'><span>Section "+cls.Sections[item]+"</span></p>\
+				  <p class='prof'><span>Professor: </span>"+cls.Instructor[cls.Sections[item]]+"</p> \
+				  <p class='times'><span>Times: </span>"+cls.Time[cls.Sections[item]]+"</p> \
+				  <p class='rooms'><span>Room: </span>"+cls.Room[cls.Sections[item]]+"</p> \
+				 </div>";
+			}
+			boxcode += "<p class='descriptions'><span>Description: </span>"+cls.Overview.desc+"</p></div></div>";
 		}
+		r.html(boxcode);
+		createBoxSlides();
 	}
 }
 

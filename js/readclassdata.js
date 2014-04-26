@@ -58,7 +58,24 @@ function getDiscussions(inClass)
 function getHeader(inClass)
 {
 	//Returns a header title for the course, e.g. "PHYSICS 135-1 General Physics"
-	return inClass.subject + " " + inClass.catalog_num + " " + inClass.title;
+	return inClass.title+" " +inClass.subject + " " + inClass.catalog_num;
+}
+
+function getFlags(flag)
+{
+	//returns an array of all the flags which are encoded in the flag value.
+	var flags = new Array(9);
+	var i = 0;
+	while (flag != 0)
+	{
+		if ((flag & 1) > 0)
+		{ flags[i] = true;}
+		else
+		{ flags[i] = false;}
+		flag = flag >> 1;
+		i++;
+	}
+	return flags;
 }
 
 function getDept(inClass)
@@ -82,6 +99,7 @@ function getMatchingClasses(toFind,termData) //Arguments: Special array of class
 		continueSearch = false;
 		curClass = 0; //Move back to the top of the department 
 		var classnumber = toFind.classlist[i];
+		//console.log(getFlags(toFind.flags[i]));
 		
 		//Look ahead to find the class
 		while (termData[curClass].catalog_num != classnumber)
@@ -99,7 +117,7 @@ function getMatchingClasses(toFind,termData) //Arguments: Special array of class
 		var headerData = getHeader(termData[curClass]);
 		
 		var overviewData = getOverview(termData[curClass]);
-		var flagsData = toFind.flags[i];
+		var flagsData = getFlags(toFind.flags[i]);
 		var availabilityData = getAvailability(termData[curClass]);
 		var DISdata = 	getDiscussions(termData[curClass]);
 		var classNumData = termData[curClass].class_num;

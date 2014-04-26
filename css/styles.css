@@ -499,6 +499,9 @@ div.class {
     div.class div.content p {
       padding-left: 0.4em;
       padding-right: 0.4em; }
+	div.class div.content p.section {
+	background-color: #d7d2dc;
+	}
     div.class div.content p:first-of-type {
       margin-top: 0.5em; }
     div.class div.content p:last-of-type {
