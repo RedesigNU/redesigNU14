@@ -348,7 +348,7 @@ div.wrapper {
     clear: both; }
 
 body {
-  font-family: 'Proxima-Nova'; }
+  font-family: 'Proxima-Nova', Georgia; }
 
 body, html {
   margin: 0;
@@ -367,8 +367,8 @@ header {
     margin-top: 0; }
 
 div.class {
-  margin-top: 0.2em;
-  margin-bottom: 0.2em;
+  margin-top: 0.4em;
+  margin-bottom: 0.4em;
   margin-left: 19.0796%;
   display: block;
   float: left;
@@ -377,6 +377,9 @@ div.class {
   div.class:last-child {
     margin-right: 0; }
   div.class div.header {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
     position: relative;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
@@ -400,5 +403,23 @@ div.class {
       position: absolute;
       right: 5px;
       top: 5px; }
+    div.class div.header span:nth-of-type(2) {
+      right: 30px; }
   div.class div.content {
-    display: none; }
+    height: 0px;
+    overflow: hidden; }
+  div.class.active div.header {
+    background-color: #d0b4ee;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px; }
+  div.class.active div.content {
+    height: 200px;
+    padding: 0.4em;
+    display: block;
+    background-color: #f7f2fc;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px; }
+    div.class.active div.content p:first-of-type {
+      margin-top: 0.5em; }
+    div.class.active div.content p:last-of-type {
+      margin-bottom: 0.5em; }
