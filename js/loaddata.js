@@ -1,4 +1,4 @@
-//Functions for loading and searching our distro Distros file.
+//Functions for loading and searching our Themes file.
 
 const cAPI = "http://vazzak2.ci.northwestern.edu/"
 
@@ -6,8 +6,8 @@ const cAPI = "http://vazzak2.ci.northwestern.edu/"
 var Classes = []; //Stores all the classes for a given term.
 var Terms; //Available Terms data
 
-var Distros; //Object to store our Distros data
-var DistroFields;
+var Themes; //Object to store our Distros data
+var ThemeFields;
 var flagsIndexStart = 3;
 var flagsIndexEnd = 5; //Magic Numbers
 
@@ -18,50 +18,48 @@ function LoadApp()
 	$.when
 	(
 		LoadTerms(),
-		LoadDistros()
+		LoadThemes()
 	)
 	.then(function ()
 	{
 		SearchClasses("4540","","","");
 	});
 }
-//Load the Distros CSV file from the server
-function LoadDistros()
+//Load the Themes CSV file from the server
+function LoadThemes()
 {
-	var Distrosstr;
+	var Themesstr;
 	return $.get("data/mccormick.csv", function(data) {
-		Distrosstr = String(data);
-		ParseDistros(Distrosstr);
+		Themesstr = String(data);
+		ParseThemes(Themesstr);
 	})
 
-	function ParseDistros(str)
+	function ParseThemes(str)
 	{
 		var parseobj = $.parse(str).results;
-		Distros = parseobj.rows;
-		DistroFields = parseobj.fields;
+		Themes = parseobj.rows;
+		ThemeFields = parseobj.fields;
 		
 		//Replace strings with bools
-		for (var i = 0; i < Distros.length-1; i++)
+		for (var i = 0; i < Themes.length-1; i++)
 		{
 			var bitcode  = 0;
 			for (var j = flagsIndexStart; j <= flagsIndexEnd; j++)
 			{
-				var flag = DistroFields[j];
+				var flag = ThemeFields[j];
 				
-				if (Distros[i][flag] == "")
+				if (Themes[i][flag] == "")
 				{
-					Distros[i][flag] = false;
+					Themes[i][flag] = false;
 				}
 				else
 				{
-					Distros[i][flag] = true;
+					Themes[i][flag] = true;
 					bitcode += 1 << (j-flagsIndexStart);
 				}
 			}
-			Distros[i]["flags"] = bitcode;
+			Themes[i]["flags"] = bitcode;
 		}
-		
-		console.log({ "fields": DistroFields, "content": Distros });
 	}
 }
 
@@ -95,7 +93,8 @@ function SearchClasses(term, clsnumber, clsname, flags)
 		$.when(LoadClasses(term))//Load the classes for the given search term. Classes[term] now contains your data.
 		.then(function () {
 			console.log("Beginning search on term" + term);
-			//Search
+			var testsearch = { "MATH": { "classlist": ["202-0", "211-0", "293-0"], "flags":[2, 2, 0] } };
+			console.log(getMatchingClasses(testsearch,Classes[term]));
 		});
 	}	
 }
