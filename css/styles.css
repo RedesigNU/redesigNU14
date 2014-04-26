@@ -1,0 +1,12 @@
+.wrapper {
+	max-width: 720px;
+}
+
+header h1 {
+	text-align: center;
+}
+
+header p.intro {
+	text-align: center;
+}
+
