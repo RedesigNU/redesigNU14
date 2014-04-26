@@ -978,8 +978,7 @@ function getDistroString(school, flag)
 function generateClassDisplay(class_list,school)
 {
 	var r = $(".responses");
-	if (class_list.length == 0)
-	{
+	if (class_list.length == 0) {
 		r.html("Sorry, your search returned no results. Try some other department.");
 	}
 	else
@@ -1005,7 +1004,6 @@ function generateClassDisplay(class_list,school)
 		r.html(boxcode);
 		createBoxSlides();
 	}
-}
 
 function sendFormData() {
 	var form = $("form");
@@ -1037,7 +1035,6 @@ function Search(data)
 	.then(function () {
 		var themes_matching = Theme_Search(data.flags,data.dept);
 		var final_classes = getMatchingClasses(themes_matching,Classes[data.term][data.dept]);
-		console.log(final_classes);
 		//Generate HTML here
 		generateClassDisplay(final_classes); //Generate the class display.
 	});
