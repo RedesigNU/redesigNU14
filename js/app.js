@@ -924,6 +924,8 @@ $(document).ready(function(){
 		)
 	};	
 
+	updateDistroSelect(data[0].distros);
+
 	s.change(function() {
 		var optionSelected = $(this).find("option:selected");
 		var value = optionSelected.val();
@@ -937,11 +939,31 @@ $(document).ready(function(){
 	function updateDistroSelect(distros) {
 		d = $("select#distro");
 		d.html("")
-		for (var i = 0; i <= distros.length; i++) {
+		for (var i = 0; i < distros.length; i++) {
 			d.append(
 				"<option value='" + distros[i].val + "'>" + distros[i].val + " (" + distros[i].name + ")</option>"
 			)
 		};
 	}
+
+	$("button").click(function() {
+		sendFormData()
+		return false;
+	})
+
+	function sendFormData() {
+		var form = $("form");
+		var array = form.serializeArray();
+
+		var data = {
+			school: array[0].value,
+			term: parseInt(array[1].value),
+			distro: array[2].value,
+			subject: array[3].value
+		};
+		
+		main(data);		
+	}
+
 
 })
