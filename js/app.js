@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+LoadApp();
+
 	$("div.class div.header").click(function(e) {
 		e.preventDefault();
 		var parent = $(this).parent();
@@ -10,38 +12,50 @@ $(document).ready(function(){
 	});
 
 	data = [
-		{	school: "Medill",
-			val: "JOUR",
-			distros: [
-			{	val: "AR",
-				name: "Art/Art History" },
-			{	val: "EC",
-				name: "Economics" },
-			{	val: "HS",
-				name: "History" },
-			{	val: "LT",
-				name: "Literature" },
-			{	val: "MS",
-				name: "Math/Science (non statistical)" },
-			{	val: "MS*",
-				name: "Math/Science (statistical)" },
-			{	val: "PSA",
-				name: "American Political Science" },			
-			{	val: "PSI",
-				name: "International Political Science" },
-			{	val: "RP",
-				name: "Religion/Philosophy" }
-			]
-		},
 		{	school: "McCormick",
 			val: "MEAS",
 			distros: [
 			{	val: "FAL",
-				name: "Fine Arts, Literature, and Language" },
-			{	val: "SBS",
-				name: "Social and Behavioral Sciences"},
+				name: "Fine Arts, Literature, and Language",
+				flag: 1},
 			{	val: "HSV",
-				name: "Historical Studies and Values"}
+				name: "Historical Studies and Values",
+				flag: 2},
+			{	val: "SBS",
+				name: "Social and Behavioral Sciences",
+				flag: 4}
+			]
+		},
+		{school: "Medill",
+			val: "JOUR",
+			distros: [
+			{	val: "AR",
+				name: "Art/Art History",
+				flag: 1},
+			{	val: "EC",
+				name: "Economics", 
+				flag: 2},
+			{	val: "HS",
+				name: "History", 
+				flag: 4},
+			{	val: "LT",
+				name: "Literature", 
+				flag: 8},
+			{	val: "MS",
+				name: "Math/Science (non statistical)",
+				flag: 16},
+			{	val: "MS*",
+				name: "Math/Science (statistical)",
+				flag: 32},
+			{	val: "PSA",
+				name: "American Political Science",
+				flag: 64},			
+			{	val: "PSI",
+				name: "International Political Science",
+				flag: 128},
+			{	val: "RP",
+				name: "Religion/Philosophy",
+				flag: 256}
 			]
 		}]
 
@@ -918,7 +932,6 @@ $(document).ready(function(){
 
 	subj = $("select#subject");
 	var subjectOptions = "";
-	subjectOptions += "<option value='NULL'>Don't filter</option>\n"; //Add null option
 	for (var i = 0; i < subjects.length; i++) {
 		subjectOptions +="<option value='" + subjects[i].symbol + "'>" + subjects[i].name + "</option>\n";
 	};
@@ -941,33 +954,72 @@ $(document).ready(function(){
 		d.html("")
 		for (var i = 0; i < distros.length; i++) {
 			d.append(
-				"<option value='" + distros[i].val + "'>" + distros[i].val + " (" + distros[i].name + ")</option>"
+				"<option value='" + distros[i].flag + "'>" + distros[i].val + " (" + distros[i].name + ")</option>"
 			)
 		};
 	}
 
-	$("button").click(function() {
-		sendFormData()
+	$("form").submit(function(e) {	
+		e.preventDefault();
+		sendFormData();
 		return false;
-	})
-
-	function sendFormData() {
-		var form = $("form");
-		var array = form.serializeArray();
-
-		var data = {
-			school: array[0].value,
-			term: parseInt(array[1].value),
-			distro: array[2].value,
-			subject: array[3].value
-		};
-		
-		filterClasses(data);		
-	}
-
-	function filterClasses(data) {
-		var a = $.csv.toObjects("mccormick.csv");
-		console.log(a);
-	}
-
+	});
 });
+
+function generateClassDisplay(class_list)
+{
+	
+}
+
+function sendFormData() {
+	var form = $("form");
+	var array = form.serializeArray();
+
+	var data = {
+		school: array[0].value,
+		term: parseInt(array[1].value),
+		flags: parseInt(array[2].value),
+		dept: array[3].value
+	};
+	Search(data); //Call the search function on our data.
+}
+
+/************************************ Search functionality **************************************/
+
+//Main search function which is called by the front-end form submit
+function Search(data)
+{
+	/*var data = {
+				school: array[0].value,
+				term: parseInt(array[1].value),
+				flags: array[2].value,
+				dept: array[3].value
+			};*/
+
+	//Get all the classes in the specified department which fit the distros (flags)
+	$.when(LoadClasses(data.term,data.dept))
+	.then(function () {
+		var themes_matching = Theme_Search(data.flags,data.dept);
+		var final_classes = getMatchingClasses(themes_matching,Classes[data.term][data.dept]);
+		console.log(final_classes);
+		//Generate HTML here
+		generateClassDisplay(final_classes); //Generate the class display.
+	});
+}
+
+function Theme_Search(flags, dept)
+{
+	var theme_list = [];
+	var flag_list = [];
+	var count=0;
+
+	for (var i=0; i<Themes.length; i++){
+		//for flag in flags
+		if ((Themes[i].flags & (flags)) > 0 && Themes[i].DEPT == dept)
+		{
+			theme_list[count++]= Themes[i].COURSE;
+			flag_list[count++] = Themes[i].flags;
+		}
+	}
+	return {classlist: theme_list, flags: flag_list}
+}

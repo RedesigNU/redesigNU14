@@ -22,7 +22,7 @@ function LoadApp()
 	)
 	.then(function ()
 	{
-		SearchClasses("4540","","","");
+		// Do some other stuff that needs to happen only after loading Themes and Terms
 	});
 }
 //Load the Themes CSV file from the server
@@ -71,30 +71,28 @@ function LoadTerms()
 	})
 }
 
-//Load the Classes .json
-function LoadClasses(term,section)
+//Load the Classes .json for the specified department
+function LoadClasses(term,dept)
 {
-	if (!(term in Classes))
-	{
-		return $.getJSON("data/scraper/"+term+"_data", function(data) {
-			Classes[term]= data
-		}).done(function() { console.log("Success")}).fail(function(data) { console.log(data)});
-	}
+	return $.getJSON(cAPI + "courses/?term="+term+"&subject="+dept, function(data) {
+		Classes[term] = [];
+		Classes[term][dept] = data;
+	}).done(function() { console.log("Success")}).fail(function(data) { console.log(data)});
 }
 
 //Searches the Caesar API for classes matching the search terms given
 //Use an empty string in a field to match all values (term must be specified).
-function SearchClasses(term, clsnumber, clsname, flags)
+function SearchClasses(term, dept, clsnumber, clsname, flags)
 {
 	if (term == "")
 	{ alert("Term not specified, please select a term."); }
 	else
 	{
-		$.when(LoadClasses(term))//Load the classes for the given search term. Classes[term] now contains your data.
+		$.when(LoadClasses(term,dept))//Load the classes for the given search term. Classes[term] now contains your data.
 		.then(function () {
 			console.log("Beginning search on term" + term);
-			var testsearch = { "MATH": { "classlist": ["202-0", "211-0", "300-0"], "flags":[2, 2, 0] } };
-			console.log(getMatchingClasses(testsearch,Classes[term]));
+			var testsearch = { "classlist": ["201-0", "210-0", "310-0"], "flags":[2, 2, 0] };
+			console.log(getMatchingClasses(testsearch,Classes[term][dept]));
 		});
 	}	
 }

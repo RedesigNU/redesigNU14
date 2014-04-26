@@ -19,16 +19,40 @@ function getRoom(inClass)
 	return inClass.room;
 }
 
+function getAvailability(inClass)
+{
+	//Returns whether the class has availability, could be made more complex later on.
+	return inClass.seats;
+}
+
 function getOverview(inClass)
 {
 	if (inClass.overview == null)
 	{
-		return "No Class Description Available. See Department Website";
+		return {"desc": "No Class Description Available. See Department Website", "desc_set": null};
 	}
 	else
 	{
-		return inClass.overview;
+		return {"desc": inClass.overview, "descSet": inClass.coursedesc_set};
 	}
+}
+
+function getDiscussions(inClass)
+{
+	//Looks for discussion sections in the course components field and formats them as a string.
+	var returnData = [];
+	if (inClass.coursecomponent_set.length > 0)
+	{
+		for (c in inClass.coursecomponent_set)
+		{
+			var comp = inClass.coursecomponent_set[c];
+			if (comp.component = "DIS")
+			{
+				returnData[comp.section] = {"Time": getTime(comp), "Room": getRoom(comp)};
+			}
+		}
+	}
+	return returnData;
 }
 
 function getHeader(inClass)
@@ -42,70 +66,62 @@ function getDept(inClass)
 	return inClass.subject;
 }
 
-function getMatchingClasses(toFind,termData) //Arguments: Special array of classes to find, list of classes for a particular term (from the scraped API)
+function getMatchingClasses(toFind,termData) //Arguments: Special array of classes to find, list of classes for a particular term and department(from the scraped API)
 {
 	//Searches the API class list for all the classes matching the departments and numbers given in toFind.
 	//Returns a data structure containing all the important information from the classes.
 	var curClass = 0; //indexer to the JSON classes data structure
-	var returnData = []; // --->>> Fields: "Header" "Time" "Instructor" "Room" "Overview" "Flags" "Class_num" <<<---
-	console.log(toFind);
-	//Iterate by department
-	for (dept in toFind)
+	var returnData = []; // --->>> Fields: "Header" "Time" "Instructor" "Room" "Available" "Overview" "Flags" "Class_num" <<<---
+	var continueSearch = false; // when toggled allows us to continue the search for the next class.
+	console.log(toFind); //DEBUG
+	console.log(termData); //DEBUG
+	//Search the classes in this department
+	//Check whether the class number is in toFind (Requires that both toFind and Classes be sorted, which they are as of now.
+	for (var i = 0; i < toFind.classlist.length; i++)
 	{
-		var continueSearch = false;
-		//Find the top class for the first department in toFind.
-		while (getDept(termData[curClass]) != dept)
+		continueSearch = false;
+		curClass = 0; //Move back to the top of the department 
+		var classnumber = toFind.classlist[i];
+		
+		//Look ahead to find the class
+		while (termData[curClass].catalog_num != classnumber)
 		{ 
-			curClass += 1; 
-			if (curClass >= termData.length)
+			curClass += 1;
+			
+			//If we have reached the end of the department, stop searching for this class.
+			if (curClass >= termData.length) 
 			{ continueSearch = true; break; }
 		}
 		
-		if (continueSearch) //If the department does not exist in this term.
-		{ continue; }
+		if (continueSearch)
+		{ continue;  } //Move to next class
 		
-		var deptTop = curClass;
+		var headerData = getHeader(termData[curClass]);
 		
-		//Check whether the class number is in toFind (Requires that both toFind and Classes be sorted, which they are as of now.
-		for (var i = 0; i < toFind[dept].classlist.length; i++)
-		{
-			curClass = deptTop; //Move back to the top of the department 
-			var classnumber = toFind[dept].classlist[i];
-			console.log(classnumber);
-			//Look ahead to find the class
-			while (termData[curClass].catalog_num != classnumber)
-			{ 
-				curClass += 1;
-				
-				//If we have reached the end of the department, stop searching for this class.
-				if (curClass >= termData.length) 
-				{ continueSearch = true; break; }
-				else if (getDept(termData[curClass]) != dept)
-				{ continueSearch = true; break; }
-			}
-			
-			if (continueSearch)
-			{ continue; }//Move to next class
-			
-			var headerData = getHeader(termData[curClass]);
-			var instructorData = getInstructor(termData[curClass]);
-			var overviewData = getOverview(termData[curClass]);
-			var flagsData = toFind[dept].flags[i];
-			var classNumData = termData[curClass].class_num;
-			
-			//Get the time and room data
-			var timeData = []; //A dictionary of section numbers and the times they meet.
-			var roomData = [];
-			while (termData[curClass].catalog_num == classnumber)
-			{ 
-				timeData[termData[curClass].section] = getTime(termData[curClass]); 
-				roomData[termData[curClass].section] = getRoom(termData[curClass]);
-				curClass += 1;
-			}
-			
-			//Add the class description to the return data
-			returnData.push({ "Header": headerData, "Time": timeData, "Instructor": instructorData, "Room": roomData, "Overview": overviewData, "Flags": flagsData, "Class_num": classNumData})
+		var overviewData = getOverview(termData[curClass]);
+		var flagsData = toFind.flags[i];
+		var availabilityData = getAvailability(termData[curClass]);
+		var DISdata = 	getDiscussions(termData[curClass]);
+		var classNumData = termData[curClass].class_num;
+		var classIdData = termData[curClass].id;
+		
+		//Get the time, discussion section, and room data
+		var timeData = []; //A dictionary of section numbers and the times they meet.
+		var roomData = [];
+		var instructorData = [];
+		var sectionData = [];
+		while (termData[curClass].catalog_num == classnumber)
+		{ 
+			var section = termData[curClass].section;
+			sectionData.push(section);
+			timeData[section] = getTime(termData[curClass]); 
+			roomData[section] = getRoom(termData[curClass]);
+			instructorData[section] = getInstructor(termData[curClass]);
+			curClass += 1;
 		}
+		
+		//Add the class description to the return data
+		returnData.push({"id": classIdData, "Header": headerData, "Time": timeData, "Instructor": instructorData, "Room": roomData, "Sections":sectionData, "Overview": overviewData, "Flags": flagsData, "Available": availabilityData, "Class_num": classNumData, "Discussions":DISdata});
 	}
 	return returnData;
 }
