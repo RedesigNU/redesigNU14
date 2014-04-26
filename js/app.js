@@ -999,7 +999,7 @@ function generateClassDisplay(class_list,school)
 				  <p class='rooms'><span>Room: </span>"+cls.Room[cls.Sections[item]]+"</p> \
 				 </div>";
 			}
-			boxcode += "<p class='descriptions'><span>Description: </span>"+cls.Overview.desc+"</p></div></div>";
+			boxcode += "<p class='descriptions'>" + cls.Overview.desc+"</p></div></div>";
 		}
 		r.html(boxcode);
 		createBoxSlides();
