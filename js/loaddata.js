@@ -93,7 +93,7 @@ function SearchClasses(term, clsnumber, clsname, flags)
 		$.when(LoadClasses(term))//Load the classes for the given search term. Classes[term] now contains your data.
 		.then(function () {
 			console.log("Beginning search on term" + term);
-			var testsearch = { "MATH": { "classlist": ["202-0", "211-0", "293-0"], "flags":[2, 2, 0] } };
+			var testsearch = { "MATH": { "classlist": ["202-0", "211-0", "300-0"], "flags":[2, 2, 0] } };
 			console.log(getMatchingClasses(testsearch,Classes[term]));
 		});
 	}	

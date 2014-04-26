@@ -13,6 +13,12 @@ function getInstructor(inClass)
 	return inClass.instructor.name;
 }
 
+function getRoom(inClass)
+{
+	//Returns the room the class is held in
+	return inClass.room;
+}
+
 function getOverview(inClass)
 {
 	if (inClass.overview == null)
@@ -41,7 +47,7 @@ function getMatchingClasses(toFind,termData) //Arguments: Special array of class
 	//Searches the API class list for all the classes matching the departments and numbers given in toFind.
 	//Returns a data structure containing all the important information from the classes.
 	var curClass = 0; //indexer to the JSON classes data structure
-	var returnData = []; //Fields: "Header" "Time" "Instructor" "Overview" "Flags"
+	var returnData = []; // --->>> Fields: "Header" "Time" "Instructor" "Room" "Overview" "Flags" "Class_num" <<<---
 	console.log(toFind);
 	//Iterate by department
 	for (dept in toFind)
@@ -85,17 +91,20 @@ function getMatchingClasses(toFind,termData) //Arguments: Special array of class
 			var instructorData = getInstructor(termData[curClass]);
 			var overviewData = getOverview(termData[curClass]);
 			var flagsData = toFind[dept].flags[i];
+			var classNumData = termData[curClass].class_num;
 			
-			//Get the time and other descriptive info.
+			//Get the time and room data
 			var timeData = []; //A dictionary of section numbers and the times they meet.
+			var roomData = [];
 			while (termData[curClass].catalog_num == classnumber)
 			{ 
-				timeData[termData[curClass].section] = [getTime(termData[curClass])]; 
+				timeData[termData[curClass].section] = getTime(termData[curClass]); 
+				roomData[termData[curClass].section] = getRoom(termData[curClass]);
 				curClass += 1;
 			}
 			
 			//Add the class description to the return data
-			returnData.push({ "Header": headerData, "Time": timeData, "Instructor": instructorData, "Overview": overviewData, "Flags": flagsData })
+			returnData.push({ "Header": headerData, "Time": timeData, "Instructor": instructorData, "Room": roomData, "Overview": overviewData, "Flags": flagsData, "Class_num": classNumData})
 		}
 	}
 	return returnData;
